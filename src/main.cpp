@@ -25,6 +25,7 @@ int main() {
 
     int* released = ptr3.release();
     assert(*released == 10 && !ptr3);
+    delete released;
 
     ptr.reset(new int(20));
     assert(*ptr == 20);
