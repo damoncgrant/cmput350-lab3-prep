@@ -34,6 +34,9 @@ int main() {
     empty.reset();
     assert(!empty);
 
+    UniquePtr<int> ptr4 = makeUnique<int>(5);
+    assert(*ptr4 == 5);
+
     std::cout << "All assertions passed" << std::endl;
 
     return 0;

@@ -65,9 +65,10 @@ class UniquePtr {
 
         void reset(T* newPtr = nullptr) // Reset operator
         {
-            T* temp = ptr;
-            ptr = newPtr;
-            delete temp;
+            if (ptr != newPtr) {
+                delete ptr;
+                ptr = newPtr;
+            }
         }
 
         void swap(UniquePtr<T>& other)  // Swap operator
@@ -86,4 +87,13 @@ class UniquePtr {
         T* ptr;
 
 };
+
+template <typename T, typename... Args>
+UniquePtr<T> makeUnique(Args&&... args)
+{
+    return UniquePtr<T>(
+        new T(std::forward<Args>(args)...)
+    );
+}
+
 #endif
